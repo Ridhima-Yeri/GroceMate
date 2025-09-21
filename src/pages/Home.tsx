@@ -34,8 +34,6 @@ const Home: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Toast notification state
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
@@ -174,7 +172,7 @@ const Home: React.FC = () => {
               ) : featuredProducts.length > 0 ? (
                 <div className="featured-products-horizontal-scroll">
                   {featuredProducts.map((product, index) => {
-                    // Create different badge types for variety
+
                     const badgeTypes = ['Featured', 'Hot', 'New', 'Sale'];
                     const badgeClasses = ['badge-featured', 'badge-hot', 'badge-new', 'badge-sale'];
                     const currentBadge = badgeTypes[index % badgeTypes.length];

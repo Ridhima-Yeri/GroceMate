@@ -73,8 +73,6 @@ const Checkout: React.FC = () => {
   const subtotal = getTotalPrice();
   const deliveryFee = subtotal > 500 ? 0 : 40;
   const total = subtotal + deliveryFee;
-  
-  // Handle form input changes
   const handleAddressChange = (field: keyof DeliveryAddress, value: string) => {
     setDeliveryAddress(prev => ({
       ...prev,
@@ -99,13 +97,11 @@ const Checkout: React.FC = () => {
     return true;
   };
   
-  // Show error message
   const showError = (message: string) => {
     setToastMessage(message);
     setShowToast(true);
   };
   
-  // Navigate to orders page
   const goToOrders = () => {
     setShowToast(false);
     setShowGoToOrders(false);
@@ -114,7 +110,6 @@ const Checkout: React.FC = () => {
   
   // Handle order placement
   const handlePlaceOrder = async () => {
-    // Check if user is logged in
     const token = localStorage.getItem('token');
     if (!token) {
       setShowLoginToast(true);
@@ -124,17 +119,16 @@ const Checkout: React.FC = () => {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      // Generate order number first
+
       const generatedOrderNumber = `ORD${Date.now()}`;
       setOrderNumber(generatedOrderNumber);
 
-      // Create order object
       const order = {
         items: items.map(item => ({
           _id: item._id,
           name: item.name,
           quantity: item.quantity,
-          price: Number(item.price), // Ensure price is a number
+          price: Number(item.price),
           image: item.image
         })),
         deliveryAddress: {
@@ -154,7 +148,6 @@ const Checkout: React.FC = () => {
         estimatedDelivery: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
       };
 
-      // Send order to backend
       const response = await fetch('https://grocemate-bckend.onrender.com/api/orders', {
         method: 'POST',
         headers: {
@@ -168,8 +161,6 @@ const Checkout: React.FC = () => {
         const data = await response.json();
         throw new Error(data.message || 'Failed to place order');
       }
-
-      // Clear cart
       clearCart();
 
       setIsLoading(false);

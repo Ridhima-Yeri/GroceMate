@@ -56,17 +56,14 @@ const OrderDetailsPage: React.FC = () => {
   const { orderId } = useParams<{ orderId: string }>();
   const history = useHistory();
   const [order, setOrder] = useState<OrderDetails | null>(null);
-  
-  // Force page to apply correct theme on view enter
+
   useIonViewDidEnter(() => {
-    // Trigger a re-render to apply current theme
     document.querySelector('.order-details-page')?.classList.add('theme-applied');
     setTimeout(() => {
       document.querySelector('.order-details-page')?.classList.remove('theme-applied');
     }, 10);
   });
-  
-  // Helper function to get status color
+
   const getStatusColor = (status: string): string => {
     switch(status.toLowerCase()) {
       case 'delivered': return 'success';
@@ -77,7 +74,6 @@ const OrderDetailsPage: React.FC = () => {
     }
   };
 
-  // Helper function to get status icon
   const getStatusIcon = (status: string): string => {
     switch(status.toLowerCase()) {
       case 'delivered': return checkmarkCircleOutline;
@@ -88,7 +84,6 @@ const OrderDetailsPage: React.FC = () => {
     }
   };
 
-  // Format date helper
   const formatDate = (dateString: string): string => {
     const options: Intl.DateTimeFormatOptions = { 
       year: 'numeric', 
@@ -100,7 +95,6 @@ const OrderDetailsPage: React.FC = () => {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
-  // Fetch order details on component mount
   const [notFound, setNotFound] = useState(false);
   useEffect(() => {
     const fetchOrderDetails = () => {
@@ -137,35 +131,29 @@ const OrderDetailsPage: React.FC = () => {
     history.replace('/orders');
   };
   
-  // print helper — set print meta and trigger native print
   const handlePrint = () => {
     if (!order) return;
     const doc = new jsPDF();
 
-    // Title
     doc.setFontSize(18);
     doc.text('GroceMate - Order Invoice', 20, 20);
 
-    // Order Info
     doc.setFontSize(12);
     doc.text(`Order Number: ${order.id}`, 20, 35);
     doc.text(`Order Date: ${formatDate(order.date)}`, 20, 43);
     doc.text(`Status: ${order.status}`, 20, 51);
 
-    // Delivery Info
     if (order.deliveryAddress) {
       doc.text('Delivery Information:', 20, 63);
       doc.text(`Address: ${order.deliveryAddress}`, 25, 71);
       if (order.phoneNumber) doc.text(`Phone: ${order.phoneNumber}`, 25, 79);
     }
 
-    // Payment Info
     if (order.paymentMethod) {
       doc.text('Payment Information:', 20, 91);
       doc.text(`Method: ${order.paymentMethod}`, 25, 99);
     }
 
-    // Order Items Table
     let y = 111;
     doc.text('Order Items:', 20, y);
     y += 8;
@@ -184,7 +172,6 @@ const OrderDetailsPage: React.FC = () => {
       y += 7;
     });
 
-    // Summary
     y += 5;
     doc.text(`Items Subtotal: ${order.total}`, 20, y);
     y += 7;
@@ -200,7 +187,6 @@ const OrderDetailsPage: React.FC = () => {
     ).toFixed(2)}`, 20, y);
     doc.setFont('helvetica', 'normal');
 
-    // Order Notes
     if (order.orderNotes) {
       y += 10;
       doc.text('Special Instructions:', 20, y);
@@ -208,11 +194,9 @@ const OrderDetailsPage: React.FC = () => {
       doc.text(order.orderNotes, 25, y);
     }
 
-    // Save PDF
     doc.save(`Order_${order.id}_Invoice.pdf`);
   };
 
-  // If order is still loading, show a loading message
   if (notFound) {
     return (
       <IonPage className="order-details-page admin-page">

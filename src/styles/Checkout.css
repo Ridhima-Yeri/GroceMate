@@ -1,9 +1,9 @@
-/* Toast notification below toolbar */
+
 .toast-below-toolbar {
   --offset-top: 56px !important;
   top: var(--offset-top, 56px) !important;
 }
-/* Checkout Page - Clean Minimal Design */
+
 .checkout-content {
   --background: var(--ion-background-color);
   padding: 0;
@@ -30,7 +30,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Empty Cart State */
+
 .checkout-empty {
   display: flex;
   flex-direction: column;
@@ -46,7 +46,6 @@
   margin-bottom: 1rem;
 }
 
-/* Order Summary Card */
 .order-summary-card ion-card-content {
   padding: 1rem 1.25rem;
 }
@@ -138,7 +137,6 @@
   color: var(--ion-color-dark);
 }
 
-/* Card Headers Global Style */
 ion-card ion-card-header {
   padding: 1rem;
 }
@@ -156,7 +154,6 @@ ion-card ion-card-title ion-icon {
   color: var(--ion-color-primary);
 }
 
-/* Delivery Address Card */
 .delivery-address-card ion-card-content {
   padding: 1.25rem;
 }
@@ -206,7 +203,6 @@ ion-card ion-card-title ion-icon {
   box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.2);
 }
 
-/* Payment Method Card */
 .payment-method-card ion-card-content {
   padding: 1.25rem;
 }
@@ -229,7 +225,6 @@ ion-card ion-card-title ion-icon {
   font-size: 1.5rem;
 }
 
-/* Order Notes Card */
 .order-notes-card ion-card-content {
   padding: 1.25rem;
 }
@@ -277,7 +272,6 @@ ion-card ion-card-title ion-icon {
   --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Order Success Modal */
 .order-success-modal {
   --height: auto;
   --width: 90%;
@@ -315,12 +309,10 @@ ion-card ion-card-title ion-icon {
   margin-top: 1.5rem;
 }
 
-/* Loading State */
 .loading-spinner {
   margin-right: 0.5rem;
 }
 
-/* Toast Styling */
 ion-toast {
   --background: var(--ion-color-dark);
   --color: var(--ion-color-light);
@@ -328,7 +320,6 @@ ion-toast {
   --button-color: var(--ion-color-primary);
 }
 
-/* Admin Order Details Styles */
 .admin-order-card {
   width: 95%;
   max-width: 800px;
@@ -391,7 +382,6 @@ ion-toast {
   border-bottom: 1px solid var(--ion-color-light);
 }
 
-/* Item cells */
 .admin-table .item-name {
   font-weight: 500;
 }
@@ -404,13 +394,10 @@ ion-toast {
   width: 120px;
 }
 
-/* Item Details */
-
 .admin-table tbody tr:hover {
   background-color: var(--ion-color-light-tint);
 }
 
-/* Item Details */
 .item-name {
   font-weight: 500;
 }
@@ -453,10 +440,10 @@ ion-toast {
   min-width: 220px;
   font-size: 1rem;
   font-weight: 500;
-  text-align: left; /* Align text to left */
+  text-align: left;
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   padding: 0 8px !important;
-  margin-top: 30px !important; /* Add gap below toolbar (toolbar is 56px) */
+  margin-top: 30px !important;
 }
 
 .login-required-toast .login-toast-btn {

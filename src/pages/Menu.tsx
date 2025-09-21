@@ -10,7 +10,6 @@ const Menu: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="menu-content">
-        {/* Menu content goes here */}
       </IonContent>
     </IonPage>
   );

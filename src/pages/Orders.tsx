@@ -34,7 +34,6 @@ interface Order {
   orderNotes?: string;
 }
 
-// Remove the temporary getUserOrders function and replace with localStorage fetch
 interface ApiResponse<T> {
   success: boolean;
   data: T;
@@ -43,7 +42,7 @@ interface ApiResponse<T> {
 
 const getUserOrders = async (): Promise<ApiResponse<Order[]>> => {
   try {
-    // Get orders from localStorage
+
     const orders = JSON.parse(localStorage.getItem('orders') || '[]');
     return {
       success: true,
@@ -62,38 +61,32 @@ const getUserOrders = async (): Promise<ApiResponse<Order[]>> => {
 
 const Orders: React.FC = () => {
   const history = useHistory();
-  
-  // State management
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch orders on component mount
+
   useEffect(() => {
     fetchOrders();
   }, []);
 
-  // Fetch orders from API/localStorage
   const fetchOrders = async () => {
     try {
       setLoading(true);
       setError(null);
-
-      // Add this line to define token
       const token = localStorage.getItem('token');
 
       const response = await fetch('https://grocemate-bckend.onrender.com/api/orders', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // <-- token is now defined
+          'Authorization': `Bearer ${token}`
         }
       });
       
       const data = await response.json();
 
       if (response.ok) {
-        // Map the order data to match our interface
         const mappedOrders = data.data.map((order: any) => ({
           _id: order.orderNumber || order._id || `order_${Date.now()}`,
           orderNumber: order.orderNumber,
@@ -114,7 +107,6 @@ const Orders: React.FC = () => {
           orderNotes: order.orderNotes
         }));
         setOrders(mappedOrders || []);
-        // Save to localStorage for OrderDetails page
         localStorage.setItem('orders', JSON.stringify(mappedOrders || []));
       } else {
         setError(data.message || 'Failed to fetch orders');
@@ -127,18 +119,15 @@ const Orders: React.FC = () => {
     }
   };
 
-  // Navigate to order details page
   const handleViewDetails = (order: Order) => {
     history.push(`/order-details/${order.orderNumber || order._id}`);
   };
 
-  // Handle refresh when pulled down
   const handleRefresh = async (event: CustomEvent) => {
     await fetchOrders();
     event.detail.complete();
   };
 
-  // Format date to readable format
   const formatDate = (dateString: string): string => {
     const options: Intl.DateTimeFormatOptions = { 
       month: 'short', 
@@ -148,17 +137,14 @@ const Orders: React.FC = () => {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
-  // Get count of items in an order
   const getItemCount = (items: OrderItem[]): number => {
     return items.reduce((sum, item) => sum + item.quantity, 0);
   };
 
-  // Get status color class
   const getStatusClass = (status: string): string => {
     return `status-${status.toLowerCase()}`;
   };
 
-  // Get status color for badge
   const getStatusColor = (status: string): string => {
     switch(status.toLowerCase()) {
       case 'delivered': return 'success';

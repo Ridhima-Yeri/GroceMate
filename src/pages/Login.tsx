@@ -14,7 +14,6 @@ const Login: React.FC = () => {
   const [toastMessage, setToastMessage] = useState('');
   const history = useHistory();
 
-  // Check network status
   useEffect(() => {
     const checkOnlineStatus = () => {
       setIsOffline(!navigator.onLine);
@@ -37,10 +36,8 @@ const Login: React.FC = () => {
 
     // Handle offline state
     if (isOffline && !isRegister) {
-      // For login, we can check if we have a cached token
       const cachedToken = localStorage.getItem('token');
       const cachedUser = localStorage.getItem('user');
-      // @ts-ignore
       const email = (e.target as any).elements[0].value;
       
       if (cachedToken && cachedUser) {
@@ -48,8 +45,7 @@ const Login: React.FC = () => {
         if (user.email === email) {
           setToastMessage('Logged in with cached credentials (offline mode)');
           setShowToast(true);
-          
-          // Redirect based on role
+
           if (user.role === 'admin') {
             history.push('/admin');
           } else {
@@ -73,19 +69,16 @@ const Login: React.FC = () => {
 
     try {
       if (isRegister) {
-        // @ts-ignore
         const name = (e.target as any).elements[0].value;
-        // @ts-ignore
         const email = (e.target as any).elements[isRegister ? 1 : 0].value;
-        // @ts-ignore
         const password = (e.target as any).elements[isRegister ? 2 : 1].value;
         const res = await apiRegister(name, email, password);
         if (res.token) {
-          localStorage.setItem('token', res.token); // Save token for authenticated requests
+          localStorage.setItem('token', res.token);
           if (res.user) {
             localStorage.setItem('user', JSON.stringify(res.user));
           }
-          // Dispatch custom event for same-tab menu update
+
           window.dispatchEvent(new Event('authChanged'));
           if (res.user?.role === 'admin') {
             history.push('/admin');
@@ -96,17 +89,15 @@ const Login: React.FC = () => {
           setError(res.message || 'Registration failed');
         }
       } else {
-        // @ts-ignore
         const email = (e.target as any).elements[0].value;
-        // @ts-ignore
         const password = (e.target as any).elements[1].value;
         const res = await apiLogin(email, password);
         if (res.token) {
-          localStorage.setItem('token', res.token); // Save token for authenticated requests
+          localStorage.setItem('token', res.token);
           if (res.user) {
             localStorage.setItem('user', JSON.stringify(res.user));
           }
-          // Dispatch custom event for same-tab menu update
+
           window.dispatchEvent(new Event('authChanged'));
           if (res.user?.role === 'admin') {
             history.push('/admin');

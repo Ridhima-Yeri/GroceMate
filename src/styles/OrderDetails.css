@@ -1,4 +1,3 @@
-/* Simple Card for Order Sections */
 .simple-card {
   background: var(--ion-card-background, #fff);
   border-radius: 12px;
@@ -26,7 +25,6 @@
 .simple-card .minimal-table {
   margin-bottom: 0.5rem;
 }
-/* Minimal Section Styles for Order Details */
 .minimal-section {
   margin: 1.5rem 0 0.5rem 0;
 }
@@ -78,8 +76,7 @@
   font-weight: 700;
   font-size: 1rem;
 }
-/* Order Details Page Styles - Admin Dashboard Design */
-/* Reset and base styles */
+
 .order-details-page {
   background: var(--ion-background-color) !important;
   color: var(--ion-text-color) !important;
@@ -87,7 +84,6 @@
   flex-direction: column !important;
 }
 
-/* Remove the first toolbar (GroceMate) */
 .order-details-page ion-header:first-of-type {
   display: none !important;
 }
@@ -97,7 +93,6 @@
   color: var(--ion-text-color) !important;
 }
 
-/* Header and Toolbar Styles */
 .order-details-page ion-header {
   display: block !important;
   background: var(--ion-background-color) !important;
@@ -115,7 +110,6 @@
   padding: 0 8px !important;
 }
 
-/* Title styling */
 .admin-dashboard-title {
   font-size: 20px !important;
   font-weight: 500 !important;
@@ -123,7 +117,6 @@
   text-align: center !important;
 }
 
-/* Back button and close button styling */
 .order-details-page ion-back-button {
   --color: var(--ion-color-primary) !important;
   --icon-font-size: 24px !important;
@@ -149,9 +142,8 @@
   opacity: 1 !important;
 }
 
-/* Content Styles */
 .order-details-page ion-content {
-  --padding-top: 72px !important; /* Ensure header is visible below toolbar */
+  --padding-top: 72px !important;
   --padding-bottom: 16px !important;
   --background: var(--ion-background-color) !important;
 }
@@ -163,7 +155,6 @@
   margin-top: var(--ion-safe-area-top, 20px) !important;
 }
 
-/* Ensure content starts below header */
 .order-details-page ion-content::part(scroll) {
   padding-top: 56px !important;
 }
@@ -190,7 +181,6 @@
   padding: 16px 0;
 }
 
-/* Toolbar Container */
 ion-toolbar .toolbar-container {
   min-height: 56px !important;
   padding: 4px 16px !important;
@@ -208,14 +198,12 @@ ion-toolbar .toolbar-content {
   gap: 8px !important;
 }
 
-/* Back button styling */
 ion-back-button {
   --color: var(--ion-color-primary) !important;
   --icon-font-size: 24px !important;
   margin: 0 !important;
 }
 
-/* iOS specific fixes */
 .ios .order-details-page ion-header {
   height: max-content !important;
 }
@@ -224,7 +212,6 @@ ion-back-button {
   --padding-top: env(safe-area-inset-top, 0px) !important;
 }
 
-/* Title styling */
 ion-title {
   font-size: 1.2rem !important;
   font-weight: 600 !important;
@@ -232,7 +219,6 @@ ion-title {
   padding: 0 !important;
 }
 
-/* Order Summary Card */
 .order-summary-card {
   background: var(--ion-card-background) !important;
   color: var(--ion-text-color) !important;
@@ -321,7 +307,6 @@ ion-title {
   color: var(--ion-color-success);
 }
 
-/* Status Progress Indicator */
 .status-progress {
   padding: 1.5rem 0;
   margin: 1rem 0;
@@ -387,7 +372,6 @@ ion-title {
   background: var(--ion-color-success);
 }
 
-/* Special handling for completed status lines */
 .progress-steps .progress-step:nth-child(1).completed + .progress-line:nth-child(2),
 .progress-steps .progress-step:nth-child(3).completed + .progress-line:nth-child(4),
 .progress-steps .progress-step:nth-child(5).completed + .progress-line:nth-child(6) {
@@ -475,7 +459,6 @@ ion-title {
   text-align: right !important;
 }
 
-/* Summary Rows */
 .summary-row {
   background: none;
 }
@@ -500,7 +483,6 @@ ion-title {
   font-weight: 700;
 }
 
-/* Info Grid */
 .info-grid {
   display: grid;
   gap: 1.5rem;
@@ -529,7 +511,6 @@ ion-title {
   line-height: 1.5;
 }
 
-/* Order Notes */
 .order-notes-admin {
   background: var(--ion-color-light);
   border-radius: 8px;
@@ -544,7 +525,6 @@ ion-title {
   line-height: 1.6;
 }
 
-/* Action Buttons */
 .action-buttons {
   display: flex;
   gap: 1rem;
@@ -584,7 +564,6 @@ ion-title {
   border-radius: 16px !important;
 }
 
-/* Back and close button styling */
 .order-details-page ion-buttons[slot="start"] ion-button {
   margin: 0 !important;
   padding: 0 !important;
@@ -600,7 +579,6 @@ ion-title {
   margin: 0 !important;
   padding: 0 1.5rem !important;
 .simple-admin-btn ion-icon {
-/* Ensure .page-header is below toolbar and aligned to page body */
 .order-details-page .page-header {
   padding: 72px 1.5rem 1rem !important;
   background: var(--ion-background-color) !important;
@@ -630,13 +608,11 @@ ion-title {
   background: var(--ion-color-light);
 }
 
-/* Themed Toolbar */
 .themed-toolbar {
   --background: var(--ion-toolbar-background);
   --color: var(--ion-toolbar-color);
 }
 
-/* Loading Container */
 .loading-container {
   display: flex;
   justify-content: center;
@@ -645,7 +621,6 @@ ion-title {
   color: var(--ion-color-medium);
 }
 
-/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
   .order-summary-card,
   .admin-form {
@@ -665,7 +640,6 @@ ion-title {
   }
 }
 
-/* Mobile responsive */
 @media (max-width: 768px) {
   .admin-dashboard-full {
     padding: 0.5rem;
@@ -707,8 +681,7 @@ ion-title {
   .section-title-admin {
     font-size: 1.1rem;
   }
-  
-  /* Mobile Progress Steps */
+
   .status-progress {
     padding: 1rem 0;
   }
@@ -739,8 +712,7 @@ ion-title {
     font-size: 0.9rem;
     text-align: left;
   }
-  
-  /* Mobile Table - Card Layout */
+
   .admin-table {
     overflow: visible;
   }
@@ -843,7 +815,6 @@ ion-title {
   }
 }
 
-/* Ensure no horizontal overflow */
 .order-details-page,
 .admin-dashboard-full,
 .order-summary-card,
@@ -852,7 +823,6 @@ ion-title {
   overflow-x: hidden !important;
 }
 
-/* Hide scrollbars */
 .order-details-page::-webkit-scrollbar,
 .admin-dashboard-full::-webkit-scrollbar {
   width: 0px;
@@ -861,24 +831,21 @@ ion-title {
 
 /* Print Styles */
 @media print {
-  /* Print Environment Setup */
+
   @page {
     size: A4;
     margin: 1.5cm;
   }
 
-  /* Hide everything by default */
   body * {
     visibility: hidden !important;
   }
 
-  /* Show only print section */
   .print-section,
   .print-section * {
     visibility: visible !important;
   }
 
-  /* Basic print layout */
   .print-section {
     position: absolute !important;
     left: 0 !important;
@@ -888,7 +855,6 @@ ion-title {
     background: white !important;
   }
 
-  /* Hide unnecessary elements */
   .print-section .status-progress,
   .print-section .action-buttons,
   .print-section .admin-form:not(.print-summary):not(:has(.section-title-admin)),
@@ -897,7 +863,6 @@ ion-title {
     display: none !important;
   }
 
-  /* Order header styling */
   .print-section .order-id-section {
     border-bottom: 2px solid #000 !important;
     padding-bottom: 15px !important;
@@ -909,7 +874,6 @@ ion-title {
     color: var(--ion-text-color) !important;
   }
 
-  /* Status badge */
   .print-section .status-badge-large {
     background: none !important;
     border: 1px solid #000 !important;
@@ -917,7 +881,6 @@ ion-title {
     font-size: 12pt !important;
   }
 
-  /* Total amount styling */
   .print-section .final-total td {
     font-size: 14pt !important;
     font-weight: bold !important;
@@ -926,7 +889,6 @@ ion-title {
     padding: 10pt !important;
   }
 
-  /* Payment info styling */
   .print-section .section-title-admin {
     font-size: 14pt !important;
     color: var(--ion-text-color) !important;
@@ -943,7 +905,6 @@ ion-title {
     font-size: 12pt !important;
   }
 
-  /* Footer styling */
   .print-section .print-footer {
     margin-top: 30pt !important;
     padding-top: 15pt !important;
@@ -961,7 +922,6 @@ ion-title {
     font-style: italic !important;
   }
 
-  /* Force colors to print */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -984,7 +944,6 @@ ion-title {
     color: #000;
   }
 
-  /* Print Footer */
   .print-footer {
     margin-top: 3em;
     padding-top: 1em;
@@ -999,13 +958,11 @@ ion-title {
     font-style: italic;
   }
 
-  /* Force Background Colors */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Status Badge */
   .status-badge-large {
     background: none !important;
     border: 1px solid #000;
@@ -1014,7 +971,6 @@ ion-title {
     font-size: 9pt;
   }
 
-  /* Ensure Page Breaks */
   .admin-form {
     page-break-inside: avoid;
   }

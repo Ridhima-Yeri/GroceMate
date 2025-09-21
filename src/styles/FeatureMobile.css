@@ -1,12 +1,7 @@
-/* Additional mobile-specific styles for feature cards */
-/* Mobile-specific feature card enhancements */
-
-/* Features Layout Enhancement */
 .features-grid {
   margin-top: 2.5rem;
 }
 
-/* Create a responsive grid layout for features */
 .features-layout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -14,7 +9,6 @@
   margin-top: 2rem;
 }
 
-/* Theme support for feature cards */
 .feature-card {
   background-color: var(--ion-card-background) !important;
   color: var(--ion-text-color) !important;
@@ -33,13 +27,12 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
-/* Theme adjustments for feature icon */
+
 .feature-icon {
   background-color: rgba(var(--ion-color-primary-rgb), 0.1) !important;
   color: var(--ion-color-primary) !important;
 }
 
-/* Dark mode specific adjustments */
 @media (prefers-color-scheme: dark) {
   .feature-card {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3) !important;
@@ -60,7 +53,6 @@
 }
 
 @media (max-width: 480px) {
-  /* Feature card specific styles for mobile */
   .features-grid .feature-card {
     margin-bottom: 15px;
     padding: 1.5rem;

@@ -31,7 +31,7 @@ import { pencilOutline, logOutOutline, personOutline, keyOutline, shieldOutline,
 import { useHistory } from 'react-router-dom';
 import { updateProfile, changePassword, uploadProfileImage, getProfileData } from '../api/api';
 import '../styles/Profile.css';
-import '../styles/IconFix.css'; // Import IconFix.css for proper icon theming
+import '../styles/IconFix.css';
 
 interface UserProfile {
   _id?: string;
@@ -44,7 +44,6 @@ interface UserProfile {
   updatedAt?: string;
 }
 
-// Helper function to ensure type safety when creating UserProfile objects
 const createUserProfile = (data: Partial<UserProfile> & { name: string, email: string, role: string }): UserProfile => {
   return {
     name: data.name,
@@ -58,19 +57,16 @@ const createUserProfile = (data: Partial<UserProfile> & { name: string, email: s
   };
 };
 
-// Create a custom modal hook to fix focus management
 const useAccessibleModal = () => {
   const modalRef = useRef<HTMLIonModalElement>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
 
   const openModal = () => {
-    // Save the currently focused element
     lastFocusedElement.current = document.activeElement as HTMLElement;
     return true;
   };
 
   const closeModal = () => {
-    // Wait for the modal to close then restore focus
     setTimeout(() => {
       lastFocusedElement.current?.focus();
     }, 100);
@@ -101,13 +97,7 @@ const Profile: React.FC = () => {
   });
   const history = useHistory();
   const mainContentRef = useRef<HTMLDivElement>(null);
-  
-  // Define simple setters for modal state instead of having multiple close functions
-
   const serverUrl = 'https://grocemate-bckend.onrender.com';
-  // const serverUrl = 'http://localhost:5000'; // Update this with your actual server URL
-
-  // Create refs for focus management
   const modalCloseRef = useRef<HTMLIonButtonElement>(null);
   const firstInputRef = useRef<HTMLIonInputElement>(null);
   const { modalRef: editModalRef, openModal: openEditModal, closeModal: closeEditModal } = useAccessibleModal();
@@ -120,20 +110,17 @@ const Profile: React.FC = () => {
   const fetchUserProfile = async () => {
     setLoading(true);
     try {
-      // First check if we have a token
       const token = localStorage.getItem('token');
       if (!token) {
         history.push('/login');
         return;
       }
       
-      // Try to get fresh data from API
       try {
         const userData = await getProfileData();
         if (userData) {
-          console.log("Fetched user data:", userData); // Debug log
-          
-          // Store the fresh data in localStorage for offline access
+          console.log("Fetched user data:", userData);
+
           localStorage.setItem('user', JSON.stringify(userData));
           setUser(userData);
           setFormData(prev => ({
@@ -147,14 +134,12 @@ const Profile: React.FC = () => {
         console.log('Using offline mode due to connection issue:', error);
         setIsOfflineMode(true);
         
-        // If API fails, use cached data
         const cachedUser = JSON.parse(localStorage.getItem('user') || '{}');
         if (Object.keys(cachedUser).length === 0) {
           setToastMessage('Could not connect to server. Please check your connection.');
           setToastColor('warning');
           setShowToast(true);
           
-          // Use cached credentials if available
           const email = localStorage.getItem('lastLoginEmail');
           if (email) {
             const tempUser = {
@@ -170,7 +155,6 @@ const Profile: React.FC = () => {
               email: tempUser.email
             });
           } else {
-            // If no user data at all, redirect to login
             setTimeout(() => {
               history.push('/login');
             }, 2000);
@@ -212,7 +196,6 @@ const Profile: React.FC = () => {
         [name]: value
       };
       
-      // Check if data has changed from the original user data
       if (user) {
         const hasChanged = 
           name === 'name' && value !== user.name || 
@@ -238,7 +221,6 @@ const Profile: React.FC = () => {
     
     if (fileInputRef.current) {
       fileInputRef.current.click();
-      // Immediately restore focus to avoid stuck focus issues
       setTimeout(() => mainContentRef.current?.focus(), 100);
     }
   };
@@ -247,7 +229,6 @@ const Profile: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    // Validate file type
     const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
     if (!validTypes.includes(file.type)) {
       setToastMessage('Invalid file type. Please upload an image.');
@@ -256,8 +237,7 @@ const Profile: React.FC = () => {
       return;
     }
     
-    // Validate file size (5MB max)
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       setToastMessage('File is too large. Maximum size is 5MB.');
       setToastColor('danger');
@@ -269,7 +249,6 @@ const Profile: React.FC = () => {
       setUploading(true);
       const result = await uploadProfileImage(file);
       
-      // Update user state and localStorage with new avatar
       if (user) {
         const updatedUser = createUserProfile({
           ...user,
@@ -297,8 +276,6 @@ const Profile: React.FC = () => {
     history.push('/admin');
   };
 
-  // Create the action buttons for the modals
-
   if (loading) {
     return (
       <IonPage>
@@ -325,16 +302,14 @@ const Profile: React.FC = () => {
     );
   }
 
-  // Format membership date nicely
   const memberSince = user.createdAt 
     ? new Date(user.createdAt).toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
       }) 
-    : 'January 2024'; // Fallback date
+    : 'January 2024';
 
-  // Get full avatar URL if it's a relative path
   const avatarUrl = user.avatar && !user.avatar.startsWith('http') && !user.avatar.startsWith('data:') 
     ? `${serverUrl}${user.avatar}` 
     : user.avatar;

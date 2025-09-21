@@ -30,7 +30,6 @@ declare namespace JSX {
 
 const Products: React.FC = () => {
   const location = useLocation();
-  // Sync state with URL params on initial load and when location.search changes
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const category = params.get('category') || 'all';
@@ -46,14 +45,11 @@ const Products: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
-  // Search state
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Add toast notification state
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   
-  // Use cart context
   const { addToCart } = useCart();
 
   // Fetch products and categories from backend
@@ -61,7 +57,6 @@ const Products: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Use getProducts() for consistent API response
         const [productsResponse, categoriesResponse] = await Promise.all([
           getProducts(),
           getCategories()
@@ -98,12 +93,10 @@ const Products: React.FC = () => {
   useEffect(() => {
     let filtered = [...allProducts];
 
-    // Filter by featured if requested
     if (showFeaturedOnly) {
       filtered = filtered.filter((product: Product) => product.featured === true);
     }
 
-    // Filter by category
     if (selectedCategory && selectedCategory !== 'all') {
       filtered = filtered.filter((product: Product) => 
         product.category?._id === selectedCategory || 
@@ -111,7 +104,6 @@ const Products: React.FC = () => {
       );
     }
 
-    // Filter by search term
     if (searchTerm.trim() !== '') {
       filtered = filtered.filter((product: Product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -124,34 +116,29 @@ const Products: React.FC = () => {
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId);
     setIsCategoryDropdownOpen(false);
-    
-    // Update URL with new category
+
     const params = new URLSearchParams(location.search);
     params.set('category', categoryId);
     window.history.pushState({}, '', `${location.pathname}?${params.toString()}`);
   };
 
-  // Handle adding product to cart
   const handleAddToCart = (product: Product) => {
     addToCart(product);
     setToastMessage(`${product.name} added to cart!`);
     setShowToast(true);
   };
 
-  // Get product count for each category
   const getCategoryCount = (categoryId: string) => {
     if (categoryId === 'all') return allProducts.length;
     return allProducts.filter((product: Product) => product.category?._id === categoryId).length;
   };
 
-  // Get selected category name
   const getSelectedCategoryName = () => {
     if (selectedCategory === 'all') return 'All Products';
     const category = categories.find((c: Category) => c._id === selectedCategory);
     return category ? category.name : 'All Products';
   };
 
-  // Handle opening the categories dropdown
   const handleCategoriesButtonClick = () => {
     setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
   };
@@ -233,8 +220,7 @@ const Products: React.FC = () => {
                         onClick={() => {
                           const newFeaturedState = !showFeaturedOnly;
                           setShowFeaturedOnly(newFeaturedState);
-                          
-                          // Update URL with featured status
+
                           const params = new URLSearchParams(location.search);
                           if (newFeaturedState) {
                             params.set('featured', 'true');
@@ -250,8 +236,6 @@ const Products: React.FC = () => {
                           onIonChange={(e) => {
                             const newFeaturedState = e.detail.checked;
                             setShowFeaturedOnly(newFeaturedState);
-                            
-                            // Update URL with featured status
                             const params = new URLSearchParams(location.search);
                             if (newFeaturedState) {
                               params.set('featured', 'true');

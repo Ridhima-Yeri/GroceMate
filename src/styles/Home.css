@@ -40,7 +40,6 @@
   background: #000;
 }
 
-/* Ensure video loads and plays properly */
 .home-video::-webkit-media-controls {
   display: none !important;
 }
@@ -126,7 +125,6 @@
   min-height: 50px;
 }
 
-/* Section Styling */
 .section {
   padding: 4rem 0;
   position: relative;
@@ -239,12 +237,10 @@
   width: 65%;
 }
 
-/* Simple hover effect */
 .category-card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Simple transition for hover effect */
 .category-card {
   transition: box-shadow 0.3s ease;
 }
@@ -296,12 +292,10 @@
   background: #7c739b;
 }
 
-/* Featured Products Section */
 .featured-section {
   background: var(--ion-color-light);
 }
 
-/* Horizontal Featured Products Container */
 .featured-products-horizontal-container {
   width: 100%;
   max-width: 100%;
@@ -318,8 +312,6 @@
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--ion-color-primary) transparent;
-  
-  /* Hide scrollbar on WebKit browsers but keep functionality */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -344,7 +336,7 @@
 .featured-product-card {
   min-width: 280px;
   max-width: 280px;
-  height: 380px; /* Increased height to accommodate button */
+  height: 380px;
   background: var(--ion-card-background);
   border-radius: 16px;
   overflow: hidden;
@@ -364,7 +356,7 @@
 
 .featured-product-image {
   position: relative;
-  height: 180px; /* Reduced slightly to make room for button */
+  height: 180px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -412,7 +404,6 @@
   margin: 0;
 }
 
-/* Add to Cart Button for Featured Products */
 .featured-add-to-cart-btn {
   background: var(--ion-color-primary);
   color: var(--ion-color-primary-contrast);
@@ -429,7 +420,7 @@
   gap: 0.5rem;
   width: 100%;
   margin-top: 0.5rem;
-  flex-shrink: 0; /* Prevent button from shrinking */
+  flex-shrink: 0;
 }
 
 .featured-add-to-cart-btn:hover {
@@ -445,12 +436,11 @@
   font-size: 1rem;
 }
 
-/* Mobile responsive styles for the add to cart button */
 @media (max-width: 768px) {
   .featured-product-card {
     min-width: 240px;
     max-width: 240px;
-    height: 350px; /* Adjusted for mobile */
+    height: 350px;
   }
   
   .featured-product-image {
@@ -475,7 +465,7 @@
   .featured-product-card {
     min-width: 200px;
     max-width: 200px;
-    height: 320px; /* Further adjusted for small screens */
+    height: 320px;
   }
   
   .featured-product-image {
@@ -509,7 +499,6 @@
   }
 }
 
-/* Legacy grid styles for backwards compatibility */
 .product-featured-card {
   height: 100%;
   border-radius: 16px;
@@ -615,14 +604,14 @@
 
 .product-featured-card ion-card-content {
   padding: 1.5rem;
-  text-align: center; /* Center align all text content */
+  text-align: center;
 }
 
 .product-featured-card h3 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--ion-text-color);
-  text-align: center; /* Ensure heading is centered */
+  text-align: center;
   margin: 0 0 0.5rem 0;
 }
 
@@ -630,7 +619,7 @@
   font-size: 0.9rem;
   color: var(--ion-color-medium);
   margin: 0 0 1rem 0;
-  text-align: center; /* Center align category text */
+  text-align: center;
 }
 
 .product-price {
@@ -638,7 +627,7 @@
   font-weight: 700;
   color: var(--ion-color-primary);
   margin: 0;
-  text-align: center; /* Center align price */
+  text-align: center;
 }
 
 .section-cta {
@@ -798,7 +787,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* CTA Section */
 .cta-section {
   background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
   color: white;
@@ -843,7 +831,6 @@
   --background: rgba(255, 255, 255, 0.3);
 }
 
-/* Ionic Component Overrides */
 .home-content ion-grid {
   padding: 0;
 }
@@ -864,7 +851,7 @@
 
 .home-content ion-card-content {
   padding: 1rem !important;
-  text-align: center; /* Center align all card content text in home page */
+  text-align: center;
 }
 
 .home-content ion-button {
@@ -873,7 +860,6 @@
   text-transform: none;
 }
 
-/* Ensure proper spacing and visibility */
 .section * {
   box-sizing: border-box;
 }
@@ -884,7 +870,6 @@
   width: 100%;
 }
 
-/* Force visibility for all elements */
 .section,
 .section *,
 .category-card,
@@ -899,7 +884,6 @@
   display: block !important;
 }
 
-/* Mobile Responsive Styles for Horizontal Featured Products */
 @media (max-width: 768px) {
   .featured-products-horizontal-container {
     padding: 0 0.5rem;
@@ -987,7 +971,6 @@
   flex-direction: column !important;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .home-title {
     font-size: 2rem;
@@ -1079,7 +1062,6 @@
   }
 }
 
-/* Footer Section */
 .home-footer {
   background: var(--ion-background-color);
   color: var(--ion-text-color);
@@ -1159,7 +1141,6 @@
   font-style: italic;
 }
 
-/* Mobile responsive adjustments */
 @media (max-width: 480px) {
   .home-footer {
     padding: 1.5rem 0;
@@ -1175,8 +1156,6 @@
   }
 }
 
-/* Dark mode adjustments */
-/* Theme-aware styles */
 .footer-contact .footer-link {
   background: var(--ion-item-background);
   border: 1px solid var(--ion-border-color, rgba(var(--ion-text-color-rgb), 0.1));

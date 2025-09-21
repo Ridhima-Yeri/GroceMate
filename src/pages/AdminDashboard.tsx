@@ -13,10 +13,6 @@ import {
 
 const API_BASE = 'https://grocemate-bckend.onrender.com/api/admin';
 
-// ...existing code...
-
-
-
 function getToken() {
   return localStorage.getItem('token');
 }
@@ -110,7 +106,7 @@ export const AdminDashboard: React.FC = () => {
     price: '', 
     image: '', 
     category: '', 
-    featured: false, // Add featured field
+    featured: false,
     id: '' 
   });
   const [orderStatusForm, setOrderStatusForm] = useState({ 
@@ -123,13 +119,11 @@ export const AdminDashboard: React.FC = () => {
   // Fetch all data
   useEffect(() => {
     fetchAll();
-    // eslint-disable-next-line
   }, []);
 
   async function fetchAll() {
     setLoading(true);
-    
-    // For local storage implementation
+
     if (window.location.hostname === 'localhost' && !window.location.port.includes('5000')) {
       try {
         // Get users, categories, and products from mock data
@@ -233,7 +227,6 @@ export const AdminDashboard: React.FC = () => {
         }
       } catch (error) {
         console.error('Error deleting user:', error);
-        // You might want to show an error message to the user here
       } finally {
         setLoading(false);
       }
@@ -328,8 +321,6 @@ export const AdminDashboard: React.FC = () => {
 
   // --- ORDERS ---
   function showOrderItems(order: any) {
-    // Ensure we have product items properly formatted for display
-    // This works with both localStorage orders and API orders
     const formattedOrder = {
       ...order,
       // Handle different possible order item structures
@@ -358,7 +349,6 @@ export const AdminDashboard: React.FC = () => {
   }
   
   async function handleOrderStatusUpdate(e: React.FormEvent | { preventDefault: () => void }) {
-    // If event is provided, prevent default form submission
     if (e && e.preventDefault) {
       e.preventDefault();
     }
@@ -374,12 +364,10 @@ export const AdminDashboard: React.FC = () => {
 
     setLoading(true);
     try {
-      // For local storage implementation
+
       if (window.location.hostname === 'localhost' && !window.location.port.includes('5000')) {
-        // Use our mock API to update the order
+
         const updatedOrder = await updateOrderStatus(orderStatusForm.id, orderStatusForm.status);
-        
-        // Refresh the orders list
         const refreshedOrders = await getAllOrders();
         setOrders(formatOrdersForAdmin(refreshedOrders));
         
@@ -388,8 +376,7 @@ export const AdminDashboard: React.FC = () => {
           message: 'Order status updated successfully',
           type: 'success'
         });
-        
-        // If there is a selected order, update its status too
+
         if (selectedOrder && (selectedOrder._id === orderStatusForm.id || selectedOrder.orderNumber === orderStatusForm.id)) {
           setSelectedOrder({
             ...selectedOrder,
@@ -397,8 +384,7 @@ export const AdminDashboard: React.FC = () => {
             deliveryStatus: updatedOrder.deliveryStatus
           });
         }
-        
-        // Only clear the form if it's a regular form submission
+
         if ('target' in e) {
           setOrderStatusForm({ id: '', status: '', orderNumber: '', customerName: '' });
         }
@@ -406,14 +392,12 @@ export const AdminDashboard: React.FC = () => {
         setLoading(false);
         return;
       }
-    
-      // For API implementation
+
       const response = await apiPut(`/orders/${orderStatusForm.id}/status`, {
         deliveryStatus: orderStatusForm.status
       });
 
       if (!response.error) {
-        // Update order in the state
         const updatedOrders = orders.map(order => 
           order._id === orderStatusForm.id ? { 
             ...order, 
@@ -423,8 +407,7 @@ export const AdminDashboard: React.FC = () => {
         );
 
         setOrders(updatedOrders);
-        
-        // If there is a selected order, update its status too
+
         if (selectedOrder && selectedOrder._id === orderStatusForm.id) {
           setSelectedOrder({
             ...selectedOrder,
@@ -438,8 +421,7 @@ export const AdminDashboard: React.FC = () => {
           message: 'Order status updated successfully',
           type: 'success'
         });
-        
-        // Only clear the form if it's a regular form submission
+
         if ('target' in e) {
           setOrderStatusForm({ id: '', status: '', orderNumber: '', customerName: '' });
         }
@@ -537,7 +519,7 @@ export const AdminDashboard: React.FC = () => {
       price: p.price,
       image: p.image,
       category: p.category?._id || '',
-      featured: p.featured || false, // Set featured status from existing product
+      featured: p.featured || false, 
       id: p._id
     });
   }
