@@ -309,10 +309,10 @@ const Products: React.FC = () => {
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
           message={toastMessage}
-          duration={2000}
+          duration={2500}
           position="top"
           color="success"
-          cssClass="toast-below-toolbar"
+          cssClass="toast-products"
           buttons={[
             {
               text: 'Dismiss',

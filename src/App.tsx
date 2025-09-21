@@ -71,7 +71,6 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './styles/variables.css';
 import './styles/ToolbarThemeFix.css';
 import './styles/App.css';
-import './styles/EmergencyFix.css';
 import './styles/ProfessionalAppFix.css';
 import './styles/ThemeSupport.css';
 import './styles/IconFix.css';

@@ -1,7 +1,8 @@
-/* Toast notification below toolbar */
-.toast-below-toolbar {
-  --offset-top: 56px !important;
-  top: var(--offset-top, 56px) !important;
+.toast-products {
+  margin-top: 30px !important;
+  padding: 0 8px !important;
+  font-size: 1rem;
+  font-weight: 500;
 }
 .menu-content {
   --background: #f9fafb;

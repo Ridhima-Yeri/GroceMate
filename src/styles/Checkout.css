@@ -446,6 +446,28 @@ ion-toast {
   color: var(--ion-color-primary);
 }
 
+.login-required-toast {
+  --background: var(--ion-color-warning, #ffe082);
+  --color: var(--ion-color-dark, #222);
+  --border-radius: 12px;
+  min-width: 220px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left; /* Align text to left */
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  padding: 0 8px !important;
+  margin-top: 30px !important; /* Add gap below toolbar (toolbar is 56px) */
+}
+
+.login-required-toast .login-toast-btn {
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  background: transparent;
+  border-radius: 8px;
+  margin-left: 12px;
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .admin-order-card {
     width: 100%;

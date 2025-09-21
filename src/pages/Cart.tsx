@@ -1,10 +1,17 @@
-import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonIcon, IonToast } from '@ionic/react';
 import { addOutline, removeOutline, trashOutline, cartOutline } from 'ionicons/icons';
 import { useCart } from '../contexts/CartContext';
+import { useState } from 'react';
 import '../styles/Cart.css';
 
 const Cart: React.FC = () => {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
+  const [showClearToast, setShowClearToast] = useState(false);
+
+  const handleClearCart = () => {
+    clearCart();
+    setShowClearToast(true);
+  };
 
   return (
     <IonPage className="cart-page">
@@ -82,13 +89,22 @@ const Cart: React.FC = () => {
                 <IonButton expand="block" className="checkout-btn" routerLink="/checkout">
                   Proceed to Checkout
                 </IonButton>
-                <button className="clear-cart-btn" onClick={clearCart}>
+                <button className="clear-cart-btn" onClick={handleClearCart}>
                   Clear Cart
                 </button>
               </div>
             </div>
           </div>
         )}
+        <IonToast
+          isOpen={showClearToast}
+          onDidDismiss={() => setShowClearToast(false)}
+          message="Cart cleared"
+          color="danger"
+          duration={1800}
+          position="top"
+          cssClass="toast-cart"
+        />
       </IonContent>
     </IonPage>
   );

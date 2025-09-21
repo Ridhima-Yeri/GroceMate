@@ -455,7 +455,7 @@ const Profile: React.FC = () => {
             duration={2000}
             color={toastColor}
             position="top"
-            cssClass="toast-below-toolbar"
+            cssClass="toast-profile"
           />
           
           <IonAlert

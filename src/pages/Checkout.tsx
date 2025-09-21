@@ -67,6 +67,7 @@ const Checkout: React.FC = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [showGoToOrders, setShowGoToOrders] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
+  const [showLoginToast, setShowLoginToast] = useState(false);
   
   // Calculate totals
   const subtotal = getTotalPrice();
@@ -113,10 +114,15 @@ const Checkout: React.FC = () => {
   
   // Handle order placement
   const handlePlaceOrder = async () => {
+    // Check if user is logged in
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setShowLoginToast(true);
+      return;
+    }
+
     if (!validateForm()) return;
-    
     setIsLoading(true);
-    
     try {
       // Generate order number first
       const generatedOrderNumber = `ORD${Date.now()}`;
@@ -149,7 +155,6 @@ const Checkout: React.FC = () => {
       };
 
       // Send order to backend
-      const token = localStorage.getItem('token');
       const response = await fetch('https://grocemate-bckend.onrender.com/api/orders', {
         method: 'POST',
         headers: {
@@ -413,6 +418,26 @@ const Checkout: React.FC = () => {
             )}
           </div>
         </IonToast>
+        {/* Login required toast */}
+        <IonToast
+          isOpen={showLoginToast}
+          onDidDismiss={() => setShowLoginToast(false)}
+          duration={0}
+          position="top"
+          color="warning"
+          cssClass="login-required-toast"
+          message="Please login to continue"
+          buttons={[
+            {
+              text: 'Login',
+              role: 'cancel',
+              handler: () => {
+                setShowLoginToast(false);
+                history.push('/login');
+              }
+            }
+          ]}
+        />
       </IonContent>
     </IonPage>
   );

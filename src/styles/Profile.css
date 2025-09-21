@@ -1,7 +1,9 @@
 /* Toast notification below toolbar */
-.toast-below-toolbar {
-  --offset-top: 56px !important;
-  top: var(--offset-top, 56px) !important;
+.toast-profile {
+  padding: 0 8px !important;
+  margin-top: 30px !important;
+  font-size: 1rem;
+  font-weight: 500;
 }
 .profile-content {
   --background: var(--ion-background-color);

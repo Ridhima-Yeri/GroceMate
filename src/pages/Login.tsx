@@ -200,7 +200,7 @@ const Login: React.FC = () => {
           duration={2000}
           color="warning"
           position="top"
-          cssClass="toast-below-toolbar"
+          cssClass="toast-login"
         />
       </IonContent>
     </IonPage>
